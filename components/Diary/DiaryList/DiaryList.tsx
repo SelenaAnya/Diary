@@ -32,7 +32,7 @@ const DiaryList: React.FC<DiaryListProps> = ({
             style="primary"
           />          
           <svg className={css.addIcon}>
-            <use href="/leleka-sprite.svg#icon-edit_square"></use>
+            <use href="/leleka-sprite.svg#icon-close"></use>
           </svg>
         </div>
       </div>
