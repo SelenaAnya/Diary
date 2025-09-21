@@ -26,11 +26,10 @@ const DiaryList: React.FC<DiaryListProps> = ({
     <div className={css.container}>
       <div className={css.header}>
         <h2 className={`header-third ${css.title}`}>Щоденник</h2>
-        <div className={css.addButton}>
+        <div className={css.addButton} onClick={onAddEntry}>
           <Button 
             label="Новий запис" 
-            style="primary" 
-            onClick={onAddEntry}
+            style="primary"
           />
         </div>
       </div>

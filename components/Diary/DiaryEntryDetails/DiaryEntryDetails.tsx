@@ -89,16 +89,18 @@ const DiaryEntryDetails: React.FC<DiaryEntryDetailsProps> = ({
       </div>
       
       <div className={css.actions}>
-        <Button 
-          label="Редагувати" 
-          style="secondary" 
-          onClick={() => onEdit(entry.id)}
-        />
-        <Button 
-          label="Видалити" 
-          style="secondary" 
-          onClick={() => onDelete(entry.id)}
-        />
+        <div onClick={() => onEdit(entry.id)}>
+          <Button 
+            label="Редагувати" 
+            style="secondary"
+          />
+        </div>
+        <div onClick={() => onDelete(entry.id)}>
+          <Button 
+            label="Видалити" 
+            style="secondary"
+          />
+        </div>
       </div>
     </div>
   );
