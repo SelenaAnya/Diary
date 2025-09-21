@@ -1,0 +1,43 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: 100%;
+  }
+  
+  .diaryContainer {
+    display: flex;
+    gap: 32px;
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .diaryList {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .diaryDetails {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  /* Desktop fixed heights */
+  @media (min-width: 1024px) {
+    .diaryList,
+    .diaryDetails {
+      height: 500px; /* Fixed height with internal scroll */
+    }
+  }
+  
+  /* Mobile/Tablet responsive layout */
+  @media (max-width: 1023px) {
+    .diaryContainer {
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .diaryDetails {
+      display: none; /* Hidden on mobile, shown via navigation */
+    }
+  }
