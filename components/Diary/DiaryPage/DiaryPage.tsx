@@ -28,11 +28,13 @@ const DiaryPage: React.FC = () => {
 
   const handleEntryClick = (entry: DiaryEntry) => {
     if (isMobile) {
-      // On mobile devices, go to a separate page
+      // На мобільних пристроях переходимо на окрему сторінку
+      // Тут потрібно додати навігацію, коли буде встановлений роутер
       console.log(`Navigate to /diary/${entry.id}`);
-      // router.push(`/diary/${entry.id}`);
+      // Для демо використаємо window.location
+      window.location.href = `/diary/${entry.id}`;
     } else {
-      // On the desktop, show the details in the right pane
+      // На десктопі показуємо деталі в правій панелі
       setSelectedEntry(entry);
       setSelectedNote(null);
     }
@@ -45,25 +47,25 @@ const DiaryPage: React.FC = () => {
 
   const handleAddEntry = () => {
     console.log('Open AddDiaryEntryModal');
-    // Тут буде логіка відкриття модального вікна**********
+    // Тут буде логіка відкриття модального вікна
   };
 
   const handleAddNote = () => {
     console.log('Open AddNoteModal');
-    // Тут буде логіка відкриття модального вікна***************
+    // Тут буде логіка відкриття модального вікна
   };
 
   const handleEditEntry = () => {
     console.log('Open AddDiaryEntryModal for editing', selectedEntry);
-    // Тут буде логіка відкриття модального вікна для редагування**************
+    // Тут буде логіка відкриття модального вікна для редагування
   };
 
   const handleDeleteEntry = () => {
     console.log('Open ConfirmationModal for deletion', selectedEntry);
-    // Тут буде логіка відкриття модального вікна підтвердження*********
+    // Тут буде логіка відкриття модального вікна підтвердження
   };
 
-  // Mobile v.
+  // Мобільна версія - показуємо тільки список
   if (isMobile) {
     return (
       <div style={{ 
@@ -88,7 +90,7 @@ const DiaryPage: React.FC = () => {
     );
   }
 
-  // Desktop v.
+  // Десктопна версія - показуємо все в одній сітці
   return (
     <div style={{ 
       minHeight: "100vh", 
