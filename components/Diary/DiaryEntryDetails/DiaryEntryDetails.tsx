@@ -1,6 +1,5 @@
 import React from 'react';
 import css from './DiaryEntryDetails.module.css';
-import Button from '@/components/ui/Button';
 
 interface DiaryEntry {
   id: string;
@@ -42,20 +41,8 @@ const DiaryEntryDetails: React.FC<DiaryEntryDetailsProps> = ({
     });
   };
 
-  const getEmotionIcon = (emotion: string) => {
-    const emotionIcons: { [key: string]: string } = {
-      'радість': '😊',
-      'сум': '😢',
-      'злість': '😠',
-      'страх': '😨',
-      'здивування': '😲',
-      'любов': '❤️',
-      'надія': '🌟',
-      'втома': '😴',
-      'спокій': '😌',
-      'хвилювання': '😰'
-    };
-    return emotionIcons[emotion] || '😊';
+  const getEmotionTag = (emotion: string) => {
+    return emotion.toLowerCase();
   };
 
   return (
@@ -68,8 +55,36 @@ const DiaryEntryDetails: React.FC<DiaryEntryDetailsProps> = ({
       )}
       
       <div className={css.header}>
+        <div className={css.headerTop}>
+          <h2 className={`header-third ${css.title}`}>Перший привіт</h2>
+          <div className={css.headerActions}>
+            <button 
+              className={css.actionButton}
+              onClick={() => onEdit(entry.id)}
+              aria-label="Редагувати запис"
+            >
+              <svg width="24" height="24" viewBox="0 0 32 32">
+                <use href="/leleka-sprite.svg#icon-edit_square"></use>
+              </svg>
+            </button>
+            <button 
+              className={css.actionButton}
+              onClick={() => onDelete(entry.id)}
+              aria-label="Видалити запис"
+            >
+              <svg width="24" height="24" viewBox="0 0 32 32">
+                <use href="/leleka-sprite.svg#icon-delete_forever"></use>
+              </svg>
+            </button>
+            <button className={css.closeButton} aria-label="Закрити">
+              <svg width="24" height="24" viewBox="0 0 32 32">
+                <use href="/leleka-sprite.svg#icon-close"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
         <div className={css.headerInfo}>
-          <h2 className={`header-third ${css.title}`}>{entry.title}</h2>
           <span className={`text-primary ${css.date}`}>
             {formatDate(entry.date)}
           </span>
@@ -77,8 +92,8 @@ const DiaryEntryDetails: React.FC<DiaryEntryDetailsProps> = ({
         
         <div className={css.emotions}>
           {entry.emotions.map((emotion, index) => (
-            <span key={index} className={css.emotionIcon}>
-              {getEmotionIcon(emotion)}
+            <span key={index} className={css.emotionTag}>
+              {getEmotionTag(emotion)}
             </span>
           ))}
         </div>
@@ -86,21 +101,6 @@ const DiaryEntryDetails: React.FC<DiaryEntryDetailsProps> = ({
       
       <div className={css.content}>
         <p className="text-primary">{entry.content}</p>
-      </div>
-      
-      <div className={css.actions}>
-        <div onClick={() => onEdit(entry.id)}>
-          <Button 
-            label="Редагувати" 
-            style="secondary"
-          />
-        </div>
-        <div onClick={() => onDelete(entry.id)}>
-          <Button 
-            label="Видалити" 
-            style="secondary"
-          />
-        </div>
       </div>
     </div>
   );

@@ -24,20 +24,8 @@ const DiaryEntryCard: React.FC<DiaryEntryCardProps> = ({ entry, onClick }) => {
     });
   };
 
-  const getEmotionIcon = (emotion: string) => {
-    const emotionIcons: { [key: string]: string } = {
-      'радість': '😊',
-      'сум': '😢',
-      'злість': '😠',
-      'страх': '😨',
-      'здивування': '😲',
-      'любов': '❤️',
-      'надія': '🌟',
-      'втома': '😴',
-      'спокій': '😌',
-      'хвилювання': '😰'
-    };
-    return emotionIcons[emotion] || '😊';
+  const getEmotionTag = (emotion: string) => {
+    return emotion.toLowerCase();
   };
 
   return (
@@ -50,13 +38,13 @@ const DiaryEntryCard: React.FC<DiaryEntryCardProps> = ({ entry, onClick }) => {
       </div>
       
       <div className={css.emotions}>
-        {entry.emotions.slice(0, 5).map((emotion, index) => (
-          <span key={index} className={css.emotionIcon}>
-            {getEmotionIcon(emotion)}
+        {entry.emotions.slice(0, 4).map((emotion, index) => (
+          <span key={index} className={css.emotionTag}>
+            {getEmotionTag(emotion)}
           </span>
         ))}
-        {entry.emotions.length > 5 && (
-          <span className={css.moreEmotions}>+{entry.emotions.length - 5}</span>
+        {entry.emotions.length > 4 && (
+          <span className={css.moreEmotions}>+{entry.emotions.length - 4}</span>
         )}
       </div>
     </div>

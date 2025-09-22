@@ -1,122 +1,167 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 24px;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.backButton {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--black);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 0;
+  align-self: flex-start;
+}
+
+.backButton:hover {
+  color: var(--pastel-pink-dark);
+}
+
+.header {
+  flex-shrink: 0;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.title {
+  margin: 0;
+  color: var(--black);
+  flex: 1;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.actionButton,
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButton:hover,
+.closeButton:hover {
+  background: var(--gray-lightest);
+}
+
+.actionButton svg,
+.closeButton svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--black);
+}
+
+.headerInfo {
+  margin-bottom: 16px;
+}
+
+.date {
+  color: var(--gray);
+  flex-shrink: 0;
+}
+
+.emotions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.emotionTag {
+  background: var(--pastel-pink);
+  color: var(--black);
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.content p {
+  line-height: 1.6;
+  margin: 0;
+  color: var(--black);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--gray);
+  text-align: center;
+}
+
+/* Desktop fixed height with scroll */
+@media (min-width: 1024px) {
+  .container {
+    height: 450px;
+    /* Fixed height for desktop */
   }
-  
+}
+
+/* Mobile/Tablet styles */
+@media (max-width: 1023px) {
   .backButton {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--black);
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 8px 0;
-    align-self: flex-start;
+    display: block;
   }
-  
-  .backButton:hover {
-    color: var(--pastel-pink-dark);
-  }
-  
-  .header {
-    flex-shrink: 0;
-  }
-  
-  .headerInfo {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 16px;
-    gap: 16px;
-  }
-  
-  .title {
-    margin: 0;
-    color: var(--black);
-    flex: 1;
-  }
-  
-  .date {
-    color: var(--gray);
-    flex-shrink: 0;
-  }
-  
-  .emotions {
-    display: flex;
+
+  .headerTop {
+    flex-direction: column;
     gap: 12px;
-    flex-wrap: wrap;
+    align-items: flex-start;
   }
-  
-  .emotionIcon {
-    font-size: 24px;
-    line-height: 1;
+
+  .headerActions {
+    align-self: flex-end;
   }
-  
-  .content {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 8px;
+
+  .emotionTag {
+    font-size: 12px;
+    padding: 4px 10px;
   }
-  
-  .content p {
-    line-height: 1.6;
-    margin: 0;
-    color: var(--black);
-  }
-  
-  .actions {
-    display: flex;
+}
+
+@media (max-width: 767px) {
+  .container {
     gap: 16px;
-    flex-shrink: 0;
+    padding: 16px;
   }
-  
-  .placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--gray);
-    text-align: center;
+
+  .headerActions {
+    gap: 8px;
   }
-  
-  /* Desktop fixed height with scroll */
-  @media (min-width: 1024px) {
-    .container {
-      height: 400px; /* Fixed height for desktop */
-    }
+
+  .actionButton svg,
+  .closeButton svg {
+    width: 18px;
+    height: 18px;
   }
-  
-  /* Mobile/Tablet styles */
-  @media (max-width: 1023px) {
-    .backButton {
-      display: block;
-    }
-    
-    .headerInfo {
-      flex-direction: column;
-      gap: 8px;
-      align-items: flex-start;
-    }
-    
-    .actions {
-      flex-direction: column;
-    }
-    
-    .emotionIcon {
-      font-size: 20px;
-    }
-  }
-  
-  @media (max-width: 767px) {
-    .container {
-      gap: 16px;
-    }
-    
-    .actions {
-      gap: 12px;
-    }
-  }
-  
+}

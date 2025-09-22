@@ -18,7 +18,7 @@ const DiaryPage = () => {
   const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Mock data - replace with API call
+  // Mock data matching the Figma design
   useEffect(() => {
     const mockEntries: DiaryEntry[] = [
       {
@@ -41,9 +41,34 @@ const DiaryPage = () => {
         date: '2025-07-09',
         emotions: ['енергія', 'дивні бажання'],
         content: 'Відчуваю прилив енергії та бажання щось нове спробувати...'
+      },
+      {
+        id: '4',
+        title: 'Дивне бажання',
+        date: '2025-07-09',
+        emotions: ['нудота', 'тривога'],
+        content: 'Важкий день...'
+      },
+      {
+        id: '5',
+        title: 'Дивне бажання',
+        date: '2025-07-09',
+        emotions: ['апетит', 'дивні бажання'],
+        content: 'Хочеться їсти все підряд...'
+      },
+      {
+        id: '6',
+        title: 'Дивне бажання',
+        date: '2025-07-09',
+        emotions: ['радість', 'щастя'],
+        content: 'Прекрасний день сьогодні!'
       }
     ];
     setEntries(mockEntries);
+    // Set first entry as selected by default for desktop
+    if (mockEntries.length > 0) {
+      setSelectedEntry(mockEntries[0]);
+    }
   }, []);
 
   useEffect(() => {
@@ -117,5 +142,3 @@ const DiaryPage = () => {
     </section>
   );
 };
-
-export default DiaryPage;

@@ -1,7 +1,6 @@
 import React from 'react';
 import css from './DiaryList.module.css';
 import DiaryEntryCard from '../DiaryEntryCard/DiaryEntryCard';
-import Button from '@/components/ui/Button';
 
 interface DiaryEntry {
   id: string;
@@ -27,13 +26,13 @@ const DiaryList: React.FC<DiaryListProps> = ({
       <div className={css.header}>
         <h2 className={`header-third ${css.title}`}>Ваші записи</h2>
         <div className={css.addButton} onClick={onAddEntry}>
-          <Button 
-            label="Новий запис" 
-            style="primary"
-          />          
-          <svg className={css.addIcon}>
-            <use href="/leleka-sprite.svg#icon-close"></use>
-          </svg>
+          <span className={css.addText}>Новий запис</span>
+          <div className={css.addIcon}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#FFCBD3"/>
+              <path d="M12 8v8M8 12h8" stroke="#000" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </div>
         </div>
       </div>
       
