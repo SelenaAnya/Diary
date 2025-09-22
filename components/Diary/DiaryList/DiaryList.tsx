@@ -1,54 +1,51 @@
-import React from 'react';
-import css from './DiaryList.module.css';
-import DiaryEntryCard from '../DiaryEntryCard/DiaryEntryCard';
-
-interface DiaryEntry {
-  id: string;
-  title: string;
-  date: string;
-  emotions: string[];
-  content: string;
-}
+import React from "react";
+import { DiaryEntry } from "../Diary.types";
+import DiaryEntryCard from "../DiaryEntryCard/DiaryEntryCard";  
+import { Plus as PlusIcon } from "lucide-react";
+import css from "./DiaryList.module.css";
 
 interface DiaryListProps {
   entries: DiaryEntry[];
-  onAddEntry: () => void;
-  onSelectEntry: (entryId: string) => void;
+  onEntryClick?: (entry: DiaryEntry) => void;
+  selectedEntryId?: string;
+  onAddEntry?: () => void;
 }
 
 const DiaryList: React.FC<DiaryListProps> = ({ 
   entries, 
-  onAddEntry, 
-  onSelectEntry 
+  onEntryClick, 
+  selectedEntryId,
+  onAddEntry 
 }) => {
   return (
     <div className={css.container}>
       <div className={css.header}>
-        <h2 className={`header-third ${css.title}`}>Ваші записи</h2>
-        <div className={css.addButton} onClick={onAddEntry}>
-          <span className={css.addText}>Новий запис</span>
+        <h2 className={`${css.title} header-third`}>Ваші записи</h2>
+        <button
+          className={css.addButton}
+          onClick={onAddEntry}
+        >
           <div className={css.addIcon}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" fill="#FFCBD3"/>
-              <path d="M12 8v8M8 12h8" stroke="#000" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
+            <PlusIcon size={24} />
           </div>
-        </div>
+          <span className={css.addText}>Новий запис</span>
+        </button>
       </div>
       
       <div className={css.entriesList}>
-        {entries.length > 0 ? (
+        {entries.length === 0 ? (
+          <div className={css.placeholder}>
+            <p className="text-primary">Записів поки що немає</p>
+          </div>
+        ) : (
           entries.map((entry) => (
             <DiaryEntryCard
               key={entry.id}
               entry={entry}
-              onClick={() => onSelectEntry(entry.id)}
+              onClick={() => onEntryClick?.(entry)}
+              isSelected={selectedEntryId === entry.id}
             />
           ))
-        ) : (
-          <div className={css.placeholder}>
-            <p className="text-primary">Наразі записи у щоденнику відсутні</p>
-          </div>
         )}
       </div>
     </div>

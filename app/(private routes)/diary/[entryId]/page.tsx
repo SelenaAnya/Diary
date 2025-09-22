@@ -1,68 +1,51 @@
-'use client';
-import { useParams, useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import GreetingBlock from '@/components/GreetingBlock/GreetingBlock';
-import DiaryEntryDetails from '@/components/Diary/DiaryEntryDetails/DiaryEntryDetails';
+"use client";
 
-interface DiaryEntry {
-  id: string;
-  title: string;
-  date: string;
-  emotions: string[];
-  content: string;
+import React from "react";
+import { useRouter } from "next/navigation";
+import DiaryEntryDetails from "@/components/Diary/DiaryEntryDetails/DiaryEntryDetails";
+import GreetingBlock from "@/components/Diary/GreetingBlock/GreetingBlock";
+import { mockEntries } from "@/components/Diary/Diary.mock";
+
+interface PageProps {
+  params: {
+    entryId: string;
+  };
 }
 
-const DiaryEntryPage = () => {
-  const params = useParams();
+const DiaryEntryPage = ({ params }: PageProps) => {
   const router = useRouter();
-  const [entry, setEntry] = useState<DiaryEntry | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Mock data - replace with API call
-    const mockEntries: DiaryEntry[] = [
-      {
-        id: '1',
-        title: 'Перший привіт',
-        date: '2025-07-15',
-        emotions: ['натхнення', 'радість'],
-        content: 'Це сталося! Сьогодні вперше, коли я спокійно дивилася фільм, я ще відчула...'
-      }
-    ];
-
-    const foundEntry = mockEntries.find(e => e.id === params.entryId);
-    setEntry(foundEntry || null);
-    setLoading(false);
-  }, [params.entryId]);
-
-  const handleEditEntry = (entryId: string) => {
-    console.log('Edit entry:', entryId);
-    // Open AddDiaryEntryModal with entry data
-  };
-
-  const handleDeleteEntry = (entryId: string) => {
-    console.log('Delete entry:', entryId);
-    // Open ConfirmationModal
-  };
+  const entry = mockEntries.find(e => e.id === params.entryId);
 
   const handleBack = () => {
     router.push('/diary');
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleEdit = () => {
+    console.log('Open AddDiaryEntryModal for editing', entry);
+    // Тут буде логіка відкриття модального вікна для редагування
+  };
+
+  const handleDelete = () => {
+    console.log('Open ConfirmationModal for deletion', entry);
+    // Тут буде логіка відкриття модального вікна підтвердження
+  };
 
   return (
-    <section style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+    <div style={{ 
+      minHeight: "100vh", 
+      background: "var(--pastel-pink-lighter)", 
+      padding: "16px" 
+    }}>
       <GreetingBlock />
-      <DiaryEntryDetails
-        entry={entry}
-        onEdit={handleEditEntry}
-        onDelete={handleDeleteEntry}
-        onBack={handleBack}
-      />
-    </section>
+      <div style={{ maxWidth: "100%", margin: "0 auto" }}>
+        <DiaryEntryDetails 
+          entry={entry || null}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onBack={handleBack}
+        />
+      </div>
+    </div>
   );
 };
 
